@@ -53,3 +53,31 @@ export const deleteHotel = async(req,res,next)=>{
         return next(err)
     }
 }
+
+// Count by City
+export const countAllHotelsByCity = async(req,res,next)=>{
+    const cities = req.query.cities.split(",")
+    //if(failed) return next(createError(401,"You're not authenticated"))
+    try{
+        const list = await Promise.all(cities.map(city=>{
+            return Hotel.countDocuments({city:city})
+        }))
+        res.status(200).json(list)
+    }catch(err){
+        return next(err)
+    }
+}
+
+
+// Count by type
+export const countAllHotelsByType = async(req,res,next)=>{
+    const failed = true
+    //if(failed) return next(createError(401,"You're not authenticated"))
+
+    try{
+        const hotels = await Hotel.find()
+        res.status(200).json(hotels)
+    }catch(err){
+        return next(err)
+    }
+}
