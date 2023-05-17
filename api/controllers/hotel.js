@@ -23,11 +23,9 @@ export const readHotel = async(req,res,next)=>{
 
 // Get Hotels
 export const readAllHotels = async(req,res,next)=>{
-    const failed = true
-    //if(failed) return next(createError(401,"You're not authenticated"))
-
+    const {min,max, ...others} = req.query
     try{
-        const hotels = await Hotel.find()
+        const hotels = await Hotel.find({...others, cheapestPrice:{$gt:min || 1, $lt:max || 999 }}).limit(req.query.limit)
         res.status(200).json(hotels)
     }catch(err){
         return next(err)
@@ -71,12 +69,21 @@ export const countAllHotelsByCity = async(req,res,next)=>{
 
 // Count by type
 export const countAllHotelsByType = async(req,res,next)=>{
-    const failed = true
-    //if(failed) return next(createError(401,"You're not authenticated"))
-
+    
     try{
-        const hotels = await Hotel.find()
-        res.status(200).json(hotels)
+        const hotelCount = await Hotel.countDocuments({type:"Hotel"})
+        const resortCount = await Hotel.countDocuments({type:"Resort"})
+        const apartmentCount = await Hotel.countDocuments({type:"Apartment"})
+        const cabinCount = await Hotel.countDocuments({type:"Cabin"})
+        const villaCount = await Hotel.countDocuments({type:"Villa"})
+        res.status(200).json([
+            {type:"Hotel",count:hotelCount},
+            {type:"Resort",count:resortCount},
+            {type:"Apartment",count:apartmentCount},
+            {type:"Cabin",count:cabinCount},
+            {type:"Villa",count:villaCount}
+
+        ])
     }catch(err){
         return next(err)
     }
