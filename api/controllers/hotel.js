@@ -1,4 +1,5 @@
 import Hotel from "../models/Hotel.js"
+import Room from "../models/Room.js"
 
 // Create Hotel
 export const createHotel = async(req,res,next)=>{
@@ -85,6 +86,27 @@ export const countAllHotelsByType = async(req,res,next)=>{
 
         ])
     }catch(err){
+        return next(err)
+    }
+}
+
+// Get Rooms
+
+export const readHotelRooms = async(req,res,next)=>{
+    try{
+        const hotel = await Hotel.findById(req.params.id)
+        
+        if (!hotel) {
+            // Handle case where hotel is not found
+            return res.status(404).json({ message: 'Hotel not found' });
+          }
+
+        const list = await Promise.all(hotel.rooms.map(room=>{
+            return Room.findById(room)
+        }))
+        res.status(200).json(list)
+    }
+    catch(err){
         return next(err)
     }
 }

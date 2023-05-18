@@ -1,5 +1,5 @@
 import express from "express"
-import { createHotel, deleteHotel, readAllHotels, readHotel, updateHotel, countAllHotelsByCity,countAllHotelsByType } from "../controllers/hotel.js"
+import { createHotel, deleteHotel, readAllHotels, updateHotel, countAllHotelsByCity,countAllHotelsByType, readHotel,readHotelRooms } from "../controllers/hotel.js"
 import {verifyAdmin} from '../utils/verifyToken.js'
 const router = express.Router()
 
@@ -21,6 +21,9 @@ router.delete("/:id",verifyAdmin,deleteHotel)
 // COUNT
 router.get("/countByCity",countAllHotelsByCity)
 router.get("/countByType",countAllHotelsByType)
+
+// ROOMS
+router.get("/room/:id",readHotelRooms)
 
 
 export default router
