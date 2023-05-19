@@ -44,7 +44,7 @@ Start the client
 `cd ../client`
 `npm start`
 
-5. Open your browser and visit `http://localhost:3000` to access the BookingApp.
+5. Open your browser and visit `http://localhost:8080` to access the BookingApp.
 
 ## Technologies Used
 
