@@ -1,0 +1,11 @@
+{
+    "name": "BookingApp",
+    "version": "1.0.0",
+    "description": "A full-stack application for hotel booking",
+    "scripts": {
+      "start-api": "cd api && npm run dev",
+      "start-client": "cd client && npm start",
+      "start": "npm run start-api & npm run start-client"
+    }
+  }
+  
