@@ -44,14 +44,13 @@ const Reserve = ({ setOpen, hotelID }) => {
     return !isFound;
   };
 
-  const handleClick = async() => {
-    try{
-        await Promise.all(selectedRooms.map(roomID)=>{
-            const res = axios.put("/")
-        })
-    }catch(err){
-        
-    }
+  const handleClick = async () => {
+    // try{
+    //     await Promise.all(selectedRooms.map(roomID)=>{
+    //         const res = axios.put("/")
+    //     })
+    // }catch(err){
+    // }
   };
 
   return (
