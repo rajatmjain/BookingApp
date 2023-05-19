@@ -48,13 +48,16 @@ Start the client
 
 ## Technologies Used
 
-- Backend:
+Backend:
+
 - Node.js
 - Express.js
 - MongoDB
 - Mongoose
 - JSON Web Tokens (JWT) for authentication
-- Frontend:
+
+Frontend:
+
 - React
 - React Router
 - Axios for HTTP requests
